@@ -13,6 +13,27 @@ public class SwipeScript : MonoBehaviour
     
     void Update()
     {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            touchTimeStart = Time.time;
+            startPos = Input.mousePosition;
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            //marking time when you release it
+            touchTimeFinish = Time.time;
+            //calculate swipe time interval
+            timeInterval = touchTimeFinish - touchTimeStart;
+            //getting release finger position
+            endPos = Input.mousePosition;
+            //calculating swipe direction
+            direction = -(startPos - endPos);
+            //add force to ball rigidbody depending on swipe time and direction
+            GetComponent<Rigidbody2D>().AddForce(direction / timeInterval * throwForse);
+        }
+        /*
         //if you touch the screen
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -33,6 +54,6 @@ public class SwipeScript : MonoBehaviour
             direction = -(startPos - endPos);
             //add force to ball rigidbody depending on swipe time and direction
             GetComponent<Rigidbody2D>().AddForce(direction / timeInterval * throwForse);
-        }
+        }**/
     }
 }
