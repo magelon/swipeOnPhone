@@ -5,10 +5,12 @@ using UnityEngine;
 public class basketBallGoal : MonoBehaviour
 {
     public GameObject win;
-    private ParticleSystem p;
+    private ParticleSystem p; AudioSource au;
+
     private void Start()
     {
         p = win.GetComponent<ParticleSystem>();
+        au = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,6 +20,7 @@ public class basketBallGoal : MonoBehaviour
             if (!p.isPlaying)
             {
                 p.Play();
+                au.Play(0);
             }
 
         }
